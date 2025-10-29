@@ -1,7 +1,7 @@
 import { Injectable, UnprocessableEntityException } from '@nestjs/common';
 import * as bcrypt from 'bcrypt';
 // import bcrypt from 'bcrypt';
-
+import { Prisma } from '@prisma/client';
 import { CreateUserRequest } from './dto/create-user.request';
 import { PrismaService } from '../prisma/prisma.service';
 
@@ -24,10 +24,18 @@ export class UsersService {
         },
       });
     } catch (err) {
-      if (err.code === 'P2002') {
+      if (
+        err instanceof Prisma.PrismaClientKnownRequestError &&
+        err.code === 'P2002'
+      ) {
         throw new UnprocessableEntityException('Email already exists.');
       }
       throw err;
     }
+  }
+  async getUser(filter: Prisma.UserWhereUniqueInput) {
+    return this.prismaService.user.findUniqueOrThrow({
+      where: filter,
+    });
   }
 }
