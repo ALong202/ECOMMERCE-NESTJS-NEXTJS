@@ -1,5 +1,5 @@
 "use server";
-console.log("API_URL value in server action:", process.env.API_URL);
+// console.log("API_URL value in server action:", process.env.API_URL);
 
 import { API_URL } from "@/app/constraints/api";
 import { getErrorMessage } from "@/app/util/erros";
