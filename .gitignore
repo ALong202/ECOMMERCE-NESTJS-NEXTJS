@@ -1,0 +1,14 @@
+# Ignore node modules everywhere
+**/node_modules
+
+# Ignore root-level NodeJS stuff
+/package.json
+/package-lock.json
+/yarn.lock
+/pnpm-lock.yaml
+
+
+.env
+dist
+.next
+out
