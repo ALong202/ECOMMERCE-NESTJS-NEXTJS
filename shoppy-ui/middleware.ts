@@ -43,4 +43,6 @@ Ngược lại (ở trang khác) → 🚫 Redirect về /auth/login.
 
 export const config = {
   matcher: ["/((?!api|_next/static|_next/image|.*\\.png$).*)"],
+  /**Nghĩa là:
+   * “Khớp với mọi URL mà KHÔNG bắt đầu bằng api, _next/static, _next/image, hoặc kết thúc bằng .png.” */
 };

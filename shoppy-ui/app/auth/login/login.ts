@@ -2,11 +2,11 @@
 
 import { redirect } from "next/navigation";
 // import { post } from "@/app/util/fetch";
-import { FormError } from "@/app/common/form-error.interface";
+import { FormError } from "@/app/common/interfaces/form-error.interface";
 import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
-import { API_URL } from "@/app/constraints/api";
-import { getErrorMessage } from "@/app/util/erros";
+import { API_URL } from "@/app/common/constraints/api";
+import { getErrorMessage } from "@/app/common/util/erros";
 
 // export default async function login(_prevState: FormError, formData: FormData) {
 //   const { error } = await post("auth/login", formData);

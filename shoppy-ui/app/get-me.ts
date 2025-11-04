@@ -1,6 +1,6 @@
 "use server";
 
-import { get } from "@/app/util/fetch";
+import { get } from "@/app/common/util/fetch";
 
 
 // export default async function getMe() {

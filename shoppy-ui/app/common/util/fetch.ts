@@ -1,5 +1,5 @@
 import { getErrorMessage } from "./erros";
-import { API_URL } from "../constraints/api";
+import { API_URL } from "@/app/common/constraints/api";
 import { cookies } from "next/headers";
 
 // const getHeaders = () => ({
