@@ -1,7 +1,8 @@
 import { NextRequest } from "next/server";
 import authenticated from "./app/auth/authenticated";
+import { unauthenticatedRoutes } from "./app/common/constraints/route";
 
-const unauthorizedRoutes = ["/auth/login", "/auth/signup"]; //mảng chứa các route không cần login
+// const unauthorizedRoutes = ["/auth/login", "/auth/signup"]; //mảng chứa các route không cần login
 
 export async function middleware(reqest: NextRequest) {
   const auth = await authenticated();
@@ -22,9 +23,9 @@ Ngược lại (ở trang khác) → 🚫 Redirect về /auth/login.
 */
 
   if (
-    !auth &&
-    !unauthorizedRoutes.some((route) =>
-      reqest.nextUrl.pathname.startsWith(route)
+    !authenticated &&
+    !unauthenticatedRoutes.some((route) =>
+      reqest.nextUrl.pathname.startsWith(route.path)
     ) // Kiểm tra xem URL hiện tại có bắt đầu bằng /auth/login hoặc /auth/signup không. Nếu có → cho phép truy cập mà không cần token.
     /*request.nextUrl.pathname: là đường dẫn (path) của request hiện tại, ví dụ:
        * /dashboard

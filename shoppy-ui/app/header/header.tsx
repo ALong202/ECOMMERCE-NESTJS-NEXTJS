@@ -16,12 +16,20 @@ import MenuItem from '@mui/material/MenuItem';
 import { AuthContext } from '../auth/auth-context';
 import { useContext, useState, MouseEvent } from 'react';
 import { route, unauthenticatedRoutes } from '../common/constraints/route';
+import logout from '../auth/logout';
+import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 // import AdbIcon from '@mui/icons-material/Adb';
 
-export default function Header() {
-  const isAuthenticated = useContext(AuthContext);
+interface HeaderProps {
+  logout: () => Promise<void>
+}
 
+export default function Header({logout }: HeaderProps) {
+  const isAuthenticated = useContext(AuthContext);
+  const router = useRouter()
+ 
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
@@ -43,8 +51,8 @@ export default function Header() {
           <Typography
             variant="h6"
             noWrap
-            component="a"
-            href="#app-bar-with-responsive-menu"
+            component={Link}
+            href="/"
             sx={{
               mr: 2,
               display: { xs: 'none', md: 'flex' },
@@ -86,7 +94,10 @@ export default function Header() {
               sx={{ display: { xs: 'block', md: 'none' } }}
             >
               {pages.map((page) => (
-                <MenuItem key={page.title} onClick={handleCloseNavMenu}>
+                <MenuItem key={page.title} onClick={ () => {
+                  router.push(page.path)
+                  handleCloseNavMenu()
+                }}>
                   <Typography sx={{ textAlign: 'center' }}>{page.title}</Typography>
                 </MenuItem>
               ))}
@@ -115,21 +126,24 @@ export default function Header() {
             {pages.map((page) => (
               <Button
                 key={page.title}
-                onClick={handleCloseNavMenu}
+                onClick={ () =>{
+                  router.push(page.path)
+                  handleCloseNavMenu()
+                }}
                 sx={{ my: 2, color: 'white', display: 'block' }}
               >
                 {page.title}
               </Button>
             ))}
           </Box>
-          {isAuthenticated && <Settings />}          
+          {isAuthenticated && <Settings  logout={logout}/>}          
         </Toolbar>
       </Container>
     </AppBar>
   );
 }
 
-const Settings = () => {
+const Settings = ({logout}: HeaderProps) => {
   
   const [anchorElUser, setAnchorElUser] = useState<null | HTMLElement>(null);
 
@@ -164,7 +178,10 @@ const Settings = () => {
               open={Boolean(anchorElUser)}
               onClose={handleCloseUserMenu}
             >              
-                <MenuItem key="Logout" onClick={handleCloseUserMenu}>
+                <MenuItem key="Logout" onClick={ async () => {
+                  await logout()
+                  handleCloseUserMenu()
+                }}>
                   <Typography sx={{ textAlign: 'center' }}>Logout</Typography>
                 </MenuItem>              
             </Menu>

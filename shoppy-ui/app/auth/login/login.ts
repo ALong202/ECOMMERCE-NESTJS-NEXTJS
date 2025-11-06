@@ -7,6 +7,7 @@ import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
 import { API_URL } from "@/app/common/constraints/api";
 import { getErrorMessage } from "@/app/common/util/erros";
+import { AUTHENTICATION_COOKIE } from "../auth-cookie";
 
 // export default async function login(_prevState: FormError, formData: FormData) {
 //   const { error } = await post("auth/login", formData);
@@ -25,7 +26,7 @@ const setAuthCookie = async (response: Response) => {
     const cookieStore = await cookies(); // 👈 phải await
 
     cookieStore.set({
-      name: "Authentication",
+      name: AUTHENTICATION_COOKIE,
       value: token,
       secure: true,
       httpOnly: true,
