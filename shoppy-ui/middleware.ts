@@ -1,9 +1,11 @@
 import { NextRequest } from "next/server";
+import authenticated from "./app/auth/authenticated";
 
 const unauthorizedRoutes = ["/auth/login", "/auth/signup"]; //mảng chứa các route không cần login
 
-export function middleware(reqest: NextRequest) {
-  const auth = reqest.cookies.get("Authentication")?.value;
+export async function middleware(reqest: NextRequest) {
+  const auth = await authenticated();
+
 
   /**👇
 
