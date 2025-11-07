@@ -2,14 +2,14 @@
 
 import { redirect } from "next/navigation";
 // import { post } from "@/app/util/fetch";
-import { FormError } from "@/app/common/interfaces/form-error.interface";
+import { FormResponse } from "@/app/common/interfaces/form-response.interface";
 import { cookies } from "next/headers";
 import { jwtDecode } from "jwt-decode";
 import { API_URL } from "@/app/common/constraints/api";
 import { getErrorMessage } from "@/app/common/util/erros";
 import { AUTHENTICATION_COOKIE } from "../auth-cookie";
 
-// export default async function login(_prevState: FormError, formData: FormData) {
+// export default async function login(_prevState: FormResponse, formData: FormData) {
 //   const { error } = await post("auth/login", formData);
 //   if (error) {
 //     return { error };
@@ -35,7 +35,10 @@ const setAuthCookie = async (response: Response) => {
   }
 };
 
-export default async function login(_prevState: FormError, formData: FormData) {
+export default async function login(
+  _prevState: FormResponse,
+  formData: FormData
+) {
   const res = await fetch(`${API_URL}/auth/login`, {
     method: "POST",
     headers: {
