@@ -12,3 +12,4 @@
 dist
 .next
 out
+/git_push.sh
