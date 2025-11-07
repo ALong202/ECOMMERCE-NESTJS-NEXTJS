@@ -14,4 +14,7 @@ export class ProductsService {
       },
     });
   }
+  async getProducts() {
+    return this.prismaService.product.findMany();
+  }
 }
