@@ -16,7 +16,6 @@ import MenuItem from '@mui/material/MenuItem';
 import { AuthContext } from '../auth/auth-context';
 import { useContext, useState, MouseEvent } from 'react';
 import { route, unauthenticatedRoutes } from '../common/constraints/route';
-import logout from '../auth/logout';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 
