@@ -1,8 +1,8 @@
-"use client"
-import { Box, Modal } from "@mui/material"
-import { Button, Stack, TextField } from "@mui/material"
-import { FormResponse } from "../../common/interfaces/form-response.interface";
+"use client";
+
+import { Box, Button, Modal, Stack, TextField } from "@mui/material";
 import { useState } from "react";
+import { FormResponse } from "../../common/interfaces/form-response.interface";
 import createProduct from "../actions/create-product";
 
 const styles = {
@@ -17,71 +17,66 @@ const styles = {
   p: 4,
 };
 
-
 interface CreateProductModalProps {
   open: boolean;
   handleClose: () => void;
 }
 
-export default function CreateProductModal({open, handleClose}: CreateProductModalProps) {
-
+export default function CreateProductModal({
+  open,
+  handleClose,
+}: CreateProductModalProps) {
   const [response, setResponse] = useState<FormResponse>();
 
   const onClose = () => {
     setResponse(undefined);
     handleClose();
-  }
-
+  };
 
   return (
-    <Modal open={open} onClose={handleClose}>
+    <Modal open={open} onClose={onClose}>
       <Box sx={styles}>
-        <form 
-          className="w-full max-w-xs" 
+        <form
+          className="w-full max-w-xs"
           action={async (formData) => {
             const response = await createProduct(formData);
             setResponse(response);
             if (!response.error) {
               onClose();
             }
-            
           }}
         >
-          <Stack spacing={2} >
-            <TextField 
-              name="name" 
-              label="Name" 
+          <Stack spacing={2}>
+            <TextField
+              name="name"
+              label="Name"
               variant="outlined"
               required
-              helperText={response?.error} 
+              helperText={response?.error}
               error={!!response?.error}
             />
-
-            <TextField 
-              name="description" 
-              label="Description" 
-              variant="outlined" 
+            <TextField
+              name="description"
+              label="Description"
+              variant="outlined"
               required
-              helperText={response?.error} 
+              helperText={response?.error}
               error={!!response?.error}
             />
-            <TextField 
-              name="price" 
-              label="Price" 
-              variant="outlined" 
+            <TextField
+              name="price"
+              label="Price"
+              variant="outlined"
               required
-              helperText={response?.error} 
+              helperText={response?.error}
               error={!!response?.error}
             />
-
-            <Button 
-              type="submit" variant="contained">
-                Submit
+            <Button type="submit" variant="contained">
+              Submit
             </Button>
-
           </Stack>
         </form>
       </Box>
     </Modal>
-  )
+  );
 }

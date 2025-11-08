@@ -1,12 +1,17 @@
 import Grid from '@mui/material/Grid';
-import Product from "./product";
 import getProducts from "./actions/get-products";
+import Product from "./product";
+import { redirect } from "next/navigation";
 
 
 export default async function Products() {
   const products = await getProducts();
+  
+    if (!Array.isArray(products)) {
+    redirect("/auth/login");
+  }
 
-  return (   
+  return (
     <Grid container spacing={3}>
       {products.map((product) => (
         <Grid
@@ -15,7 +20,8 @@ export default async function Products() {
         >
           <Product product={product}/>
         </Grid>
+
       ))}
-      </Grid>
-  )
+    </Grid>
+  );
 }

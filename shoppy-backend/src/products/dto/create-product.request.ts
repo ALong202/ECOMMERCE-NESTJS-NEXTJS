@@ -12,6 +12,5 @@ export class CreateProductRequest {
 
   @IsNumber()
   @Type(() => Number)
-  @IsNotEmpty()
   price: number;
 }
