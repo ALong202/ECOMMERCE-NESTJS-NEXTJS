@@ -4,6 +4,8 @@ import { Box, Button, Modal, Stack, TextField } from "@mui/material";
 import { useState } from "react";
 import { FormResponse } from "../../common/interfaces/form-response.interface";
 import createProduct from "../actions/create-product";
+import CloudUploadIcon from "@mui/icons-material/CloudUpload";
+import { CSSProperties } from "@mui/material/styles";
 
 const styles = {
   position: "absolute",
@@ -16,6 +18,19 @@ const styles = {
   boxShadow: 24,
   p: 4,
 };
+
+const fileInputStyles: CSSProperties = {
+  clip: "rect(0 0 0 0)",
+  clipPath: "inset(50%)",
+  height: 1,
+  overflow: "hidden",
+  position: "absolute",
+  bottom: 0,
+  left: 0,
+  whiteSpace: "nowrap",
+  width: "1px",
+
+}
 
 interface CreateProductModalProps {
   open: boolean;
@@ -71,6 +86,11 @@ export default function CreateProductModal({
               helperText={response?.error}
               error={!!response?.error}
             />
+            <Button component="label" variant="outlined" startIcon={<CloudUploadIcon />}>
+            <input type="file" name="image" style={fileInputStyles}>
+              Upload Image
+            </input>
+            </Button>
             <Button type="submit" variant="contained">
               Submit
             </Button>
