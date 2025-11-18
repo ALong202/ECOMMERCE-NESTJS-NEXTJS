@@ -12,6 +12,7 @@ export const post = async (path: string, formData: FormData) => {
     headers: { "Content-Type": "application/json", ...getHeaders() },
     body: JSON.stringify(Object.fromEntries(formData)),
   });
+  
   const parsedRes = await res.json();
   if (!res.ok) {
     return { error: getErrorMessage(parsedRes) };

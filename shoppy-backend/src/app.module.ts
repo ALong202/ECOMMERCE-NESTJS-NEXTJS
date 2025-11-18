@@ -30,11 +30,9 @@ import { join } from 'path';
       },
       inject: [ConfigService],
     }),
-
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, '..', 'public'),
     }),
-
     ConfigModule.forRoot(),
     UsersModule,
     AuthModule,
