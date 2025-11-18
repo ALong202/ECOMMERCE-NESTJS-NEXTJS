@@ -1,9 +1,8 @@
 "use server";
-// console.log("API_URL value in server action:", process.env.API_URL);
 
-import { redirect } from "next/navigation";
-import { post } from "@/app/common/util/fetch";
 import { FormResponse } from "@/app/common/interfaces/form-response.interface";
+import { post } from "@/app/common/util/fetch";
+import { redirect } from "next/navigation";
 
 export default async function createUser(
   _prevState: FormResponse,

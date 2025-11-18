@@ -5,9 +5,9 @@ export const getErrorMessage = (response: any) => {
     }
     return formatErrorMessage(response.message);
   }
-  return "An unknown error occurred.";
+  return "Unknown error occured.";
 };
 
 const formatErrorMessage = (message: string) => {
   return message.charAt(0).toUpperCase() + message.slice(1);
-} 
+};

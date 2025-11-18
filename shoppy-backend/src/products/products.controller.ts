@@ -1,26 +1,23 @@
 import {
   Body,
   Controller,
+  FileTypeValidator,
   Get,
+  MaxFileSizeValidator,
+  ParseFilePipe,
   Post,
   UploadedFile,
   UseGuards,
   UseInterceptors,
 } from '@nestjs/common';
-
 import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 import { CreateProductRequest } from './dto/create-product.request';
 import { CurrentUser } from '../auth/current-user.decorator';
 import { TokenPayload } from '../auth/token-payload.interface';
 import { ProductsService } from './products.service';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { extname } from 'path';
 import { diskStorage } from 'multer';
-import {
-  FileTypeValidator,
-  MaxFileSizeValidator,
-  ParseFilePipe,
-} from '@nestjs/common';
+import { extname } from 'path';
 
 @Controller('products')
 export class ProductsController {
@@ -35,7 +32,7 @@ export class ProductsController {
     return this.productsService.createProduct(body, user.userId);
   }
 
-  @Post(':productID/image')
+  @Post(':productId/image')
   @UseGuards(JwtAuthGuard)
   @UseInterceptors(
     FileInterceptor('image', {
@@ -54,8 +51,8 @@ export class ProductsController {
     @UploadedFile(
       new ParseFilePipe({
         validators: [
-          new MaxFileSizeValidator({ maxSize: 5000000 }),
-          new FileTypeValidator({ fileType: 'image/*' }),
+          new MaxFileSizeValidator({ maxSize: 500000 }),
+          new FileTypeValidator({ fileType: 'image/jpeg' }),
         ],
       }),
     )

@@ -1,24 +1,39 @@
 "use client";
-import {Button, Stack, TextField } from "@mui/material";
-import Link from "next/link";
+
+import { Button, Link, Stack, TextField } from "@mui/material";
+import NextLink from "next/link";
 import { useFormState } from "react-dom";
 import login from "./login";
 
 export default function Login() {
-  const [state, formAction] = useFormState( login, {error: ""});
+  const [state, formAction] = useFormState(login, { error: "" });
 
   return (
-    <form className="w-full max-w-xs" action={formAction}>
+    <form action={formAction} className="w-full max-w-xs">
       <Stack spacing={2}>
-      <TextField name="email" label="Email" variant="outlined" type="email" helperText={state.error} error={!!state.error}/>
-      <TextField name="password" label="Password" type="password" variant="outlined"  helperText={state.error} error={!!state.error}/>
-      <Button type="submit" variant="contained">Login</Button>
-      <Link href="/auth/signup" className="self-center">  
-        {"Don't have an account? Sign Up"}
-      </Link>
-    </Stack>
-
+        <TextField
+          error={!!state.error}
+          helperText={state.error}
+          name="email"
+          label="Email"
+          variant="outlined"
+          type="email"
+        />
+        <TextField
+          error={!!state.error}
+          helperText={state.error}
+          name="password"
+          label="Password"
+          variant="outlined"
+          type="password"
+        />
+        <Button type="submit" variant="contained">
+          Login
+        </Button>
+        <Link component={NextLink} href="/auth/signup" className="self-center">
+          Signup
+        </Link>
+      </Stack>
     </form>
-
   );
 }

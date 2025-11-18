@@ -9,7 +9,7 @@ export const unauthenticatedRoutes = [
   },
 ];
 
-export const route = [
+export const routes = [
   {
     title: "Home",
     path: "/",

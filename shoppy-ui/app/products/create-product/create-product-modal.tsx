@@ -8,11 +8,10 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { useState } from "react";
+import { CSSProperties, useState } from "react";
 import { FormResponse } from "../../common/interfaces/form-response.interface";
 import createProduct from "../actions/create-product";
 import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-import { CSSProperties } from "@mui/material/styles";
 
 const styles = {
   position: "absolute",
@@ -35,7 +34,7 @@ const fileInputStyles: CSSProperties = {
   bottom: 0,
   left: 0,
   whiteSpace: "nowrap",
-  width: "1px",
+  width: 1,
 };
 
 interface CreateProductModalProps {
@@ -55,16 +54,6 @@ export default function CreateProductModal({
     handleClose();
     setFileName("");
   };
-
-  //   const shortenFileName = (name: string, max = 40) => {
-  //   if (name.length <= max) return name;
-
-  //   const extIndex = name.lastIndexOf(".");
-  //   const ext = name.slice(extIndex);      // ví dụ: ".jpg"
-  //   const base = name.slice(0, max - ext.length - 3); // để dành chỗ cho "..."
-
-  //   return base + "..." + ext;
-  // };
 
   return (
     <Modal open={open} onClose={onClose}>
@@ -109,28 +98,17 @@ export default function CreateProductModal({
               variant="outlined"
               startIcon={<CloudUploadIcon />}
             >
-              Upload Image
+              Upload File
               <input
                 type="file"
                 name="image"
                 style={fileInputStyles}
                 onChange={(e) =>
-                  e.target.files &&
-                  // && setFileName(shortenFileName(e.target.files[0].name))}> // shorten file name
-                  setFileName(e.target.files[0].name)
+                  e.target.files && setFileName(e.target.files[0].name)
                 }
               ></input>
             </Button>
-            {/* <Typography>{fileName}</Typography> */}
-            <Typography
-              sx={{
-                whiteSpace: "normal", // CHO PHÉP xuống dòng
-                wordBreak: "break-all", // Bẻ chữ khi quá dài (rất quan trọng)
-              }}
-            >
-              {fileName}
-            </Typography>
-
+            <Typography>{fileName}</Typography>
             <Button type="submit" variant="contained">
               Submit
             </Button>

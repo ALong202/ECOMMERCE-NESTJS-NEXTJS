@@ -1,7 +1,6 @@
 "use server";
 
-import { get } from "@/app/common/util/fetch";
-
+import { get } from "./common/util/fetch";
 
 // export default async function getMe() {
 //   const me = await fetch(`${API_URL}/users/me`, {

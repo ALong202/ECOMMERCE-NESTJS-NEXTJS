@@ -1,26 +1,16 @@
-import Grid from '@mui/material/Grid';
+import Grid from "@mui/material/Unstable_Grid2/Grid2";
 import getProducts from "./actions/get-products";
 import Product from "./product";
-import { redirect } from "next/navigation";
-
 
 export default async function Products() {
   const products = await getProducts();
-  
-    if (!Array.isArray(products)) {
-    redirect("/auth/login");
-  }
 
   return (
-    <Grid container spacing={3}>
+    <Grid container spacing={3} sx={{ height: "85vh", overflow: "scroll" }}>
       {products.map((product) => (
-        <Grid
-          key={product.id}
-          size={{ xs: 12, sm: 6, lg: 4 }}
-        >
-          <Product product={product}/>
+        <Grid key={product.id} sm={6} lg={4} xs={12}>
+          <Product product={product} />
         </Grid>
-
       ))}
     </Grid>
   );
