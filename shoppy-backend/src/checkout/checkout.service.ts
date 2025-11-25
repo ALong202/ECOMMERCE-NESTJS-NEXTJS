@@ -35,5 +35,8 @@ export class CheckoutService {
     })
 
   }
+  async handleCheckoutWebhooks(event: any) {
+    console.log(event);
+  }
 }
 
