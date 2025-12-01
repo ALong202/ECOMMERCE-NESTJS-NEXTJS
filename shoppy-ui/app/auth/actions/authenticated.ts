@@ -1,7 +1,7 @@
 //Dùng để kiểm tra ở server Next.js, xem có cookie không.
 // Cái này dùng trong layout server component (app/layout.tsx) để xác định user hiện tại có đăng nhập không
 import { cookies } from "next/headers";
-import { AUTHENTICATION_COOKIE } from "./auth-cookie";
+import { AUTHENTICATION_COOKIE } from "../auth-cookie";
 // import { NextRequest } from "next/server";
 
 // export default function authenticated() {

@@ -36,17 +36,14 @@ export class CheckoutService {
     });
   }
   async handleCheckoutWebhooks(event: any) {
-    if (event.type === 'checkout.session.completed') {
+    if (event.type !== 'checkout.session.completed') {
       return;
     }
     const session = await this.stripe.checkout.sessions.retrieve(
       event.data.object.id,
     );
-    await this.productsService.update(
-      parseInt(session.metadata.productId),
-      {
-        sold: true,
-      },
-    );
+    await this.productsService.update(parseInt(session.metadata.productId), {
+      sold: true,
+    });
   }
 }
