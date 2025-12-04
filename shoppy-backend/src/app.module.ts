@@ -7,6 +7,7 @@ import { ProductsModule } from './products/products.module';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { CheckoutModule } from './checkout/checkout.module';
+import { HeathController } from './health.controller';
 
 @Module({
   imports: [
@@ -40,7 +41,7 @@ import { CheckoutModule } from './checkout/checkout.module';
     ProductsModule,
     CheckoutModule,
   ],
-  controllers: [],
+  controllers: [HeathController],
   providers: [],
 })
 export class AppModule {}
