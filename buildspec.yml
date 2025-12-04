@@ -14,7 +14,8 @@ phases:
     commands:
       - pnpm prisma generate
       - pnpm build
+
 artifacts:
   base-directory: shoppy-backend
   files:
-    - "**/*"
+    - '**/*'
