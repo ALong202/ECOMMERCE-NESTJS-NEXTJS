@@ -4,15 +4,15 @@ phases:
     runtime-versions:
       nodejs: latest
     commands:
-      - cd shoppy-backend
+      - cd src/shoppy-backend
       - npm install -g pnpm
       - pnpm install
   build:
     commands:
-      - cd shoppy-backend
+      - cd src/shoppy-backend
       - pnpm prisma generate
       - pnpm build
 artifacts:
-  base-directory: shoppy-backend
+  base-directory: src/shoppy-backend
   files:
-    - "**/*"
+    - '**/*'
