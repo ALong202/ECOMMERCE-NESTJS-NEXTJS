@@ -6,7 +6,7 @@ phases:
     commands:
       - npm install -g pnpm
       - pnpm install
-  build:gi
+  build:
     commands:
       - pnpm prisma generate
       - pnpm build
