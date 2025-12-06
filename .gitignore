@@ -13,3 +13,4 @@ dist
 .next
 out
 /git_push.sh
+/git_push copy.sh

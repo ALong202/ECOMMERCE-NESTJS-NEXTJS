@@ -1,21 +1,15 @@
 version: 0.2
-
 phases:
   install:
     runtime-versions:
       nodejs: latest
     commands:
-      - echo "Current dir: $(pwd)"
-      - ls -la
-      - cd shoppy-backend
       - npm install -g pnpm
       - pnpm install
   build:
     commands:
       - pnpm prisma generate
       - pnpm build
-
 artifacts:
-  base-directory: shoppy-backend
   files:
     - '**/*'
